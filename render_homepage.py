@@ -37,6 +37,7 @@ def render_section(sec: Section):
 
 
 BODY_FONT = 'sans-serif'
+SIDEBAR_WIDTH = '25vw'  # vw -> viewport width
 
 
 def render_homepage(page: MainPage, site_title: str):
@@ -51,27 +52,28 @@ def render_homepage(page: MainPage, site_title: str):
         # No border
         "border": "10px solid",
         "border-color": "green",
-        "height": "10vh",
         "font-family": BODY_FONT,
-        "display": "grid",
-        "grid-template-columns": "25% 1fr", # 25% and the rest
         "background-color": "lightblue",
         "color": "blue",  # Color of text
     })
 
     sidebar_style = dict_to_css_style({
-        # "position": "sticky",
-        # "top": "0",
+        "position": "fixed",  # pinned to the window, out of the layout
+        "top": "0",
+        "left": "0",
+        "width": SIDEBAR_WIDTH,
         "height": "100vh",
+        "box-sizing": "border-box",  # height/width include the border
+        "overflow-y": "auto",  # scroll inside if the sidebar gets long
         # "padding": "16px",
         "border": "10px solid",
         "border-color": "purple",
     })
 
     main_style = dict_to_css_style({
+        "margin-left": SIDEBAR_WIDTH,  # leave room for the fixed sidebar
         "background-color" : "beige",
-        "border": "10px solid",
-        "border-color": "red",
+        "border": "10px solid white",
     })
 
     sidebar = h.nav(style=sidebar_style)[
