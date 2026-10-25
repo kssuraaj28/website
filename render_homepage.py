@@ -85,8 +85,8 @@ def render_homepage(page: MainPage, site_title: str):
        h.p["Department of Computer Science"],
        h.p["Cornell University"],
        h.hr(style=dict_to_css_style({
-           "border": "2px solid black",
-           "height": "100px",
+           "border": "none",
+           "border-top": "2px solid black",
        })),
        [h.p[h.a(href=f"#{secid_html(s.id)}")[s.title]] for s in page.sections],
     ]
