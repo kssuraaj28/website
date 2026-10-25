@@ -16,8 +16,6 @@ def render_part(part: TextPart):
 
 def render_component(component: SectionComponent):
     match component:
-        # case Heading(text):
-        #     return h1[text]
         case Text(parts):
             return p[(render_part(x) for x in parts)]
         case List(items):
@@ -32,14 +30,12 @@ def render_section(sec: Section):
 
 
 
-def render_page(page: MainPage):
-    # The <title> is the first heading's text.
-    page_title = "Suraaj's webpage"
+def render_homepage(page: MainPage, site_title: str):
     return html(lang="en")[
         head[
             meta(charset="utf-8"),
             meta(name="viewport", content="width=device-width, initial-scale=1"),
-            title[page_title],
+            title[site_title],
         ],
         body[
             mainhtml[(render_section(s) for s in page.sections)],

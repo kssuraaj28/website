@@ -4,9 +4,10 @@ import shutil
 from pathlib import Path
 
 from data_model import MainPage
-from render import render_page
+from render_homepage import render_homepage
 
 OUT = Path("dist")
+SITE_TITLE = "Suraaj's webpage"
 
 # Each module in data/ defines this_section. Listed in display order.
 from data import about, teaching
@@ -16,7 +17,7 @@ def main():
     shutil.rmtree(OUT, ignore_errors=True)
     OUT.mkdir()
     path = OUT / "index.html"
-    path.write_text(str(render_page(MainPage(SECTIONS))))
+    path.write_text(str(render_homepage(MainPage(SECTIONS), SITE_TITLE)))
     print(f"/ -> {path}")
 
 
