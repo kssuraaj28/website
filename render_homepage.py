@@ -49,7 +49,6 @@ def render_homepage(page: MainPage, site_title: str):
 
     body_style = dict_to_css_style({
         "margin": "0",  # Browsers make the body margin 8px. Override
-        # No border
         "font-family": BODY_FONT,
         "background-color": "beige",
         "color": "black",  # Color of text
@@ -75,10 +74,14 @@ def render_homepage(page: MainPage, site_title: str):
         "padding": "16px",
     })
 
-    #TODO: % vs dv?
+    #When you give heights as percent, you need to know the parent's height.
+    #If the parent's height is unknown, a percent height just becomes auto
     sidebar = h.nav(style=sidebar_style)[
-       h.div(style=dict_to_css_style({"height" : "30%", "background-color" : "lightblue" }))["A fake image"],
-        [h.p["Sidebar text"]] * 100, ]
+       h.div(style=dict_to_css_style({"height" : "30vh", "background-color" : "lightblue" }))["A fake image"],
+       h.p["Name"],
+       h.p["Dept"],
+       h.p["Contact"],
+       h.p["Sidebar text"], ]
 
     body = h.body(style=body_style)[
         sidebar,
