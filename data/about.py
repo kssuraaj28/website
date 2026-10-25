@@ -21,5 +21,5 @@ Link("greatest show ever", "https://www.youtube.com/watch?v=iAR7Aj_p3Ck"), '.',
 ]
 
 
-this_section = Section("About me", [Text(para1), Text(para2), Text(para3)], id="about") 
+this_section = Section("About me", [Text(para1), Text(para2), Text(para3)]) 
 #this_section = Section("About me", [Text([f"Line {i}"]) for i in range(100)])

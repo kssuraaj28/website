@@ -29,11 +29,10 @@ def render_component(component: SectionComponent):
             return h.ul[(h.li[(render_part(x) for x in item.parts)] for item in items)]
 
 
-def secid_html(secid: str): return f'sec-{secid}'
+def html_sec_id(index: int) -> str: return f"sec-{index}"
 
-
-def render_section(sec: Section):
-    return h.section(id=secid_html(sec.id))[
+def render_section(index: int, sec: Section):
+    return h.section(id=html_sec_id(index))[
         h.h2[sec.title],
         (render_component(c) for c in sec.content),
     ]
@@ -44,6 +43,9 @@ SIDEBAR_WIDTH = '25vw'  # vw -> viewport width
 
 
 def render_homepage(page: MainPage, site_title: str):
+    # (index, section) pairs, shared by the sidebar links and main so the ids always match.
+    numbered = list(enumerate(page.sections, start=1))
+
     head = h.head[
         h.meta(charset="utf-8"),
         h.meta(name="viewport", content="width=device-width, initial-scale=1"),
@@ -92,13 +94,11 @@ def render_homepage(page: MainPage, site_title: str):
             "border-top": "2px solid black",
         })),
 
-        [h.p[h.a(href=f"#{secid_html(s.id)}")[s.title]]
-         for s in page.sections],
+        [h.p[h.a(href=f"#{html_sec_id(i)}")[sec.title]]
+         for i, sec in numbered],
     ]
+    main = h.main(style=main_style)[(render_section(i, sec) for i, sec in numbered)]
 
-    body = h.body(style=body_style)[
-        sidebar,
-        h.main(style=main_style)[(render_section(s) for s in page.sections)],
-    ]
+    body = h.body(style=body_style)[sidebar, main]
 
     return h.html(lang="en")[head, body]
