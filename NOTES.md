@@ -86,6 +86,15 @@ Every visible element laid our like this.
 
 "background-color" : "transparent" is the default
 
+# grid-template-columns
+- grid-template-columns only makes sense when display is "grid"
+- It is a space separated list of column widths,
+- Lots of different 'widths'
+  + fixed (px, em (font size), rem (root font size), %), 
+  + fr (fraction of remaining space), 
+  + auto
+  + minmax
+
 ------------------------------------------------
 
 

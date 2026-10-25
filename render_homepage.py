@@ -47,26 +47,29 @@ def render_homepage(page: MainPage, site_title: str):
     ]
 
     body_style = dict_to_css_style({
-        # "margin": "0", #Browsers make the body margin 8px. Override
+        "margin": "0", #Browsers make the body margin 8px. Override
+        # No border
+        "height": "100vh",
         "font-family": BODY_FONT,
         "display": "grid",
-        # grid-template-columns only makes sense when display is "grid"
-        "grid-template-columns": "300px 1fr",
+        "grid-template-columns": "25% 1fr", # 25% and the rest
         "background-color": "lightblue",
         "color": "blue",  # Color of text
-        "border": "10px solid",
-        "border-color": "green",
     })
 
     sidebar_style = dict_to_css_style({
-        "position": "sticky",
-        "top": "0",
-        "height": "100vh",
-        "padding": "16px",
+        # "position": "sticky",
+        # "top": "0",
+        # "height": "100vh",
+        # "padding": "16px",
+        "border": "10px solid",
+        "border-color": "purple",
     })
 
     main_style = dict_to_css_style({
-        "background-color" : "beige"
+        "background-color" : "beige",
+        "border": "10px solid",
+        "border-color": "red",
     })
 
     sidebar = h.nav(style=sidebar_style)[
