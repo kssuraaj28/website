@@ -29,8 +29,10 @@ def render_component(component: SectionComponent):
             return h.ul[(h.li[(render_part(x) for x in item.parts)] for item in items)]
 
 
+def secid_html(secid: str): return f'sec-{secid}'
+
 def render_section(sec: Section):
-    return h.section[
+    return h.section(id=secid_html(sec.id))[
         h.h2[sec.title],
         (render_component(c) for c in sec.content),
     ]
@@ -76,12 +78,20 @@ def render_homepage(page: MainPage, site_title: str):
 
     #When you give heights as percent, you need to know the parent's height.
     #If the parent's height is unknown, a percent height just becomes auto
-    sidebar = h.nav(style=sidebar_style)[
+    sidebar = h.aside(style=sidebar_style)[
        h.div(style=dict_to_css_style({"height" : "30vh", "background-color" : "lightblue" }))["A fake image"],
-       h.p["Name"],
-       h.p["Dept"],
-       h.p["Contact"],
-       h.p["Sidebar text"], ]
+       h.p["Suraaj Kanniwadi"],
+       h.p["Ph.D. Candidate"],
+       h.p["Department of Computer Science"],
+       h.p["Cornell University"],
+       h.hr(style=dict_to_css_style({
+           "border": "none",
+           "height": "100px",
+           "border-top": "2px solid black",
+           "border-bottom": "2px solid black",
+       })),
+       [h.p[h.a(href=f"#{secid_html(s.id)}")[s.title]] for s in page.sections],
+    ]
 
     body = h.body(style=body_style)[
         sidebar,

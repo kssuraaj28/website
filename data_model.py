@@ -37,7 +37,14 @@ SectionComponent = Text | List
 class Section:
     title: str
     content: list [SectionComponent]
+    id: str  # used for linking
 
 @dataclass(frozen=True)
 class MainPage:
     sections: list [Section]
+
+    def __post_init__(self):
+        ids = [s.id for s in self.sections]
+        duplicates = sorted({i for i in ids if ids.count(i) > 1})
+        if duplicates:
+            raise ValueError(f"Duplicate section ids: {duplicates}")
