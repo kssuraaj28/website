@@ -75,8 +75,9 @@ def render_homepage(page: MainPage, site_title: str):
         "padding": "16px",
     })
 
+    #TODO: % vs dv?
     sidebar = h.nav(style=sidebar_style)[
-       h.div(style=dict_to_css_style({"height" : "30vh", "background-color" : "lightblue" }))["A fake image"],
+       h.div(style=dict_to_css_style({"height" : "30%", "background-color" : "lightblue" }))["A fake image"],
         [h.p["Sidebar text"]] * 100, ]
 
     body = h.body(style=body_style)[
