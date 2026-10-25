@@ -1,18 +1,17 @@
 """Turns the data model into HTML. This is the only file that touches htpy."""
-from htpy import a, body, head, html, li, meta, nav, p, strong, title, ul
+from htpy import a, body, h2, head, html, li, meta, p, section, strong, title, ul
 from htpy import main as mainhtml
 
-from data_model import Bold, Heading, Link, List, SectionComponent, SectionContent, Text, TextPart
-
+from data_model import Bold, Link, List, MainPage, Section, SectionComponent, Text, TextPart
 
 def render_part(part: TextPart):
-  match part:
-    case str(txt):
-      return txt
-    case Bold(text):
-      return strong[text]
-    case Link(text, url):
-      return a(href=url)[text]
+    match part:
+        case str(txt):
+            return txt
+        case Bold(text):
+            return strong[text]
+        case Link(text, url):
+            return a(href=url)[text]
 
 
 def render_component(component: SectionComponent):
@@ -25,9 +24,17 @@ def render_component(component: SectionComponent):
             return ul[(li[(render_part(x) for x in item.parts)] for item in items)]
 
 
-def render_page(page: SectionContent):
+def render_section(sec: Section):
+    return section[
+        h2[sec.title],
+        (render_component(c) for c in sec.content),
+    ]
+
+
+
+def render_page(page: MainPage):
     # The <title> is the first heading's text.
-    page_title = next((c.text for c in page.components if isinstance(c, Heading)), "Untitled")
+    page_title = "Suraaj's webpage"
     return html(lang="en")[
         head[
             meta(charset="utf-8"),
@@ -35,7 +42,6 @@ def render_page(page: SectionContent):
             title[page_title],
         ],
         body[
-            nav[a(href="/")["Home"], " · ", a(href="/about/")["About"]],
-            mainhtml[(render_component(c) for c in page.components)],
+            mainhtml[(render_section(s) for s in page.sections)],
         ],
     ]
