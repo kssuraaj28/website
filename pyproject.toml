@@ -10,3 +10,8 @@ dependencies = [
 venvPath = "."
 venv = ".venv"
 reportMatchNotExhaustive = "error"
+
+[dependency-groups]
+typecheck = [
+    "pyright>=1.1.414",
+]
