@@ -95,6 +95,20 @@ Every visible element laid our like this.
   + auto
   + minmax
 
+# CSS heights
+- You use the height property.
+- Possible values: 
+  + '100%' (of parents height)
+  + '100vh' (100% of viewport height)
+  + 'auto' space based on children height
+
+If a child is higher than a parent,
+what happens is determined by the parent's overflow property..
+  - visible
+  - hidden / clip
+  - auto
+
+
 ------------------------------------------------
 
 
