@@ -65,7 +65,11 @@ and OOP makes it easier to add types.
 
 # Typechecking using pyright
 - Run `uvx pyright` in the project root.  (Same as `uv tool run pyright` I think)
-- Or `uv add --dev pyright` and `uv run pyright` (later)
+- Or `uv add --dev pyright` and `uv run pyright`.
+-  When you do `uv add --dev pyright`, you don't need internet to use it..
+- Also, `uv add --dev` is short for `uv add --group dev`
+- When you do `uv sync`, default-groups get installed. `dev` is a default-group by default.
+- So, if you do `uv add --group xxx yyy; uv sync`, `yyy` will go away, because `sync` only puts the default groups. Use `uv sync --group yyy` to reinstall.
 
 # Margin, border, padding, content
 Every visible element laid our like this.
