@@ -50,37 +50,31 @@ def render_homepage(page: MainPage, site_title: str):
     body_style = dict_to_css_style({
         "margin": "0", #Browsers make the body margin 8px. Override
         # No border
-        "border": "10px solid",
-        "border-color": "green",
         "font-family": BODY_FONT,
-        "background-color": "lightblue",
-        "color": "blue",  # Color of text
+        "background-color": "beige",
+        "color": "black",  # Color of text
     })
 
     sidebar_style = dict_to_css_style({
-        "position": "fixed",  # pinned to the window, out of the layout
-        "top": "0",
-        "left": "0",
+        "position": "fixed",  # pinned to the window, out of the layout. Parent's overflow setting does not matter
+        "top": "0",  "left": "0", #Where to place the element
         "width": SIDEBAR_WIDTH,
         "height": "100vh",
+        "text-align": "center",
         "box-sizing": "border-box",  # height/width include the border
         "overflow-y": "auto",  #Independent scrolling for the nav
-        # "padding": "16px",
-        "border": "10px solid",
-        "border-color": "purple",
+        "padding": "16px",
+        "background-color": "#e8e4c9", # A little darker than beige
+        "border-right": "5px solid black",
     })
 
     main_style = dict_to_css_style({
+        # I think that grid might be better. Maybe refactor later
         "margin-left": SIDEBAR_WIDTH,  # leave room for the fixed sidebar
-        "background-color" : "beige",
-        "border": "10px solid white",
+        "padding": "16px",
     })
 
-    x = [h.p["Sidebar placeholder"]] * 100
-    sidebar = h.nav(style=sidebar_style)[
-            #x,
-        h.p["Sidebar placeholder"],
-    ]
+    sidebar = h.nav(style=sidebar_style)[ h.p["Sidebar placeholder"], ]
 
     body = h.body(style=body_style)[
         sidebar,
