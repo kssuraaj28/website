@@ -64,7 +64,7 @@ def render_homepage(page: MainPage, site_title: str):
         "width": SIDEBAR_WIDTH,
         "height": "100vh",
         "box-sizing": "border-box",  # height/width include the border
-        "overflow-y": "auto",  # scroll inside if the sidebar gets long
+        "overflow-y": "auto",  #Independent scrolling for the nav
         # "padding": "16px",
         "border": "10px solid",
         "border-color": "purple",
@@ -76,7 +76,9 @@ def render_homepage(page: MainPage, site_title: str):
         "border": "10px solid white",
     })
 
+    x = [h.p["Sidebar placeholder"]] * 100
     sidebar = h.nav(style=sidebar_style)[
+            #x,
         h.p["Sidebar placeholder"],
     ]
 
