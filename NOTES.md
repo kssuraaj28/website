@@ -67,6 +67,25 @@ and OOP makes it easier to add types.
 - Run `uvx pyright` in the project root.  (Same as `uv tool run pyright` I think)
 - Or `uv add --dev pyright` and `uv run pyright` (later)
 
+# Margin, border, padding, content
+Every visible element laid our like this.
+
+            margin (transparent, outside)
+     ┌────────────── border (a visible line) ─────┐
+     │   padding (inside, shows the background)   │
+     │            content                         │
+     └────────────────────────────────────────────┘
+
+# Basic CSS coloring
+```
+        "background-color" : "lightblue",
+        "color" : "blue", # Color of text, inherited
+        "border" : "10px solid",
+        "border-color" : "green",
+```
+
+"background-color" : "transparent" is the default
+
 ------------------------------------------------
 
 

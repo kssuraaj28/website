@@ -38,6 +38,7 @@ def render_section(sec: Section):
 
 BODY_FONT = 'sans-serif'
 
+
 def render_homepage(page: MainPage, site_title: str):
     head = h.head[
         h.meta(charset="utf-8"),
@@ -46,10 +47,15 @@ def render_homepage(page: MainPage, site_title: str):
     ]
 
     body_style = dict_to_css_style({
-        "margin": "0",
+        # "margin": "0", #Browsers make the body margin 8px. Override
         "font-family": BODY_FONT,
         "display": "grid",
+        # grid-template-columns only makes sense when display is "grid"
         "grid-template-columns": "300px 1fr",
+        "background-color": "lightblue",
+        "color": "blue",  # Color of text
+        "border": "10px solid",
+        "border-color": "green",
     })
 
     sidebar_style = dict_to_css_style({
@@ -59,13 +65,17 @@ def render_homepage(page: MainPage, site_title: str):
         "padding": "16px",
     })
 
+    main_style = dict_to_css_style({
+        "background-color" : "beige"
+    })
+
     sidebar = h.nav(style=sidebar_style)[
         h.p["Sidebar placeholder"],
     ]
 
     body = h.body(style=body_style)[
         sidebar,
-        h.main[(render_section(s) for s in page.sections)],
+        h.main(style=main_style)[(render_section(s) for s in page.sections)],
     ]
 
     return h.html(lang="en")[head, body]
