@@ -48,7 +48,7 @@ def render_homepage(page: MainPage, site_title: str):
     ]
 
     body_style = dict_to_css_style({
-        "margin": "0", #Browsers make the body margin 8px. Override
+        "margin": "0",  # Browsers make the body margin 8px. Override
         # No border
         "font-family": BODY_FONT,
         "background-color": "beige",
@@ -56,15 +56,16 @@ def render_homepage(page: MainPage, site_title: str):
     })
 
     sidebar_style = dict_to_css_style({
-        "position": "fixed",  # pinned to the window, out of the layout. Parent's overflow setting does not matter
-        "top": "0",  "left": "0", #Where to place the element
+        # pinned to the window, out of the layout. Parent's overflow setting does not matter
+        "position": "fixed",
+        "top": "0",  "left": "0",  # Where to place the element
         "width": SIDEBAR_WIDTH,
         "height": "100vh",
         "text-align": "center",
         "box-sizing": "border-box",  # height/width include the border
-        "overflow-y": "auto",  #Independent scrolling for the nav
+        "overflow-y": "auto",  # Independent scrolling for the nav
         "padding": "16px",
-        "background-color": "#e8e4c9", # A little darker than beige
+        "background-color": "#e8e4c9",  # A little darker than beige
         "border-right": "5px solid black",
     })
 
@@ -74,7 +75,9 @@ def render_homepage(page: MainPage, site_title: str):
         "padding": "16px",
     })
 
-    sidebar = h.nav(style=sidebar_style)[ h.p["Sidebar placeholder"], ]
+    sidebar = h.nav(style=sidebar_style)[
+       h.div(style=dict_to_css_style({"height" : "30vh", "background-color" : "lightblue" }))["A fake image"],
+        [h.p["Sidebar text"]] * 100, ]
 
     body = h.body(style=body_style)[
         sidebar,
