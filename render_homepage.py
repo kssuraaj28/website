@@ -1,8 +1,9 @@
 """Turns the data model into HTML. This is the only file that touches htpy."""
-from htpy import a, body, div, h2, head, html, li, meta, p, section, strong, title, ul
+from htpy import a, body, h2, head, html, li, meta, nav, p, section, strong, title, ul
 from htpy import main as mainhtml
 
 from data_model import Bold, Link, List, MainPage, Section, SectionComponent, Text, TextPart
+
 
 def render_part(part: TextPart):
     match part:
@@ -29,7 +30,6 @@ def render_section(sec: Section):
     ]
 
 
-
 def render_homepage(page: MainPage, site_title: str):
     return html(lang="en")[
         head[
@@ -37,9 +37,11 @@ def render_homepage(page: MainPage, site_title: str):
             meta(name="viewport", content="width=device-width, initial-scale=1"),
             title[site_title],
         ],
-        body[
-            # Temporary placeholder; will become the aside / nav sidebar.
-            div[p["Sidebar placeholder"]],
+
+        # TODO: Don't hardcode these things..
+        body(style="margin: 0; display: grid; grid-template-columns: 150px 1fr; font-family: sans-serif;")[
+            nav(style="position: sticky; top: 0; height: 100vh; padding: 16px;")
+            [p["Sidebar placeholder"],],
             mainhtml[(render_section(s) for s in page.sections)],
         ],
     ]
