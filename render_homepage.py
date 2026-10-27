@@ -11,6 +11,17 @@ def dict_to_css_style(props: dict[str, str]) -> str:
     return " ".join(f"{name}: {value};" for name, value in props.items())
 
 
+# Same color whether visited or not, and no underline.
+LINK_STYLE = dict_to_css_style({
+    #There is some default 'a:visited' rule or something
+    # "color": "cornflowerblue", 
+    # "color": "dodgerblue", 
+    # "color": "royalblue", 
+    "color": "navy", 
+    "text-decoration": "none",
+})
+
+
 def render_part(part: TextPart):
     match part:
         case str(txt):
@@ -18,7 +29,7 @@ def render_part(part: TextPart):
         case Bold(text):
             return h.strong[text]
         case Link(text, url):
-            return h.a(href=url)[text]
+            return h.a(href=url, style=LINK_STYLE)[text]
 
 
 def render_component(component: SectionComponent):
@@ -39,6 +50,8 @@ def render_section(index: int, sec: Section):
 
 
 BODY_FONT = 'sans-serif'
+BODY_COLOR = 'beige'
+SIDEBAR_COLOR = '#e8e4c9'
 SIDEBAR_WIDTH = '25vw'  # vw -> viewport width
 
 
@@ -55,7 +68,7 @@ def render_homepage(page: MainPage, site_title: str):
     body_style = dict_to_css_style({
         "margin": "0",  # Browsers make the body margin 8px. Override
         "font-family": BODY_FONT,
-        "background-color": "beige",
+        "background-color": BODY_COLOR,
         "color": "black",  # Color of text
     })
 
@@ -69,7 +82,7 @@ def render_homepage(page: MainPage, site_title: str):
         "box-sizing": "border-box",  # height/width include the border
         "overflow-y": "auto",  # Independent scrolling for the nav
         "padding": "16px",
-        "background-color": "#e8e4c9",  # A little darker than beige
+        "background-color": SIDEBAR_COLOR,  # A little darker than beige
         "border-right": "5px solid black",
     })
 
@@ -94,7 +107,7 @@ def render_homepage(page: MainPage, site_title: str):
             "border-top": "2px solid black",
         })),
 
-        [h.p[h.a(href=f"#{html_sec_id(i)}")[sec.title]]
+        [h.p[h.a(href=f"#{html_sec_id(i)}", style=LINK_STYLE)[sec.title]]
          for i, sec in numbered],
     ]
     main = h.main(style=main_style)[(render_section(i, sec) for i, sec in numbered)]
