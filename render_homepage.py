@@ -3,7 +3,7 @@
 
 import htpy as h
 
-from data_model import Bold, Link, List, MainPage, Section, SectionComponent, Text, TextPart
+from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, Text, TextPart
 
 
 def dict_to_css_style(props: dict[str, str]) -> str:
@@ -36,7 +36,7 @@ def render_component(component: SectionComponent):
     match component:
         case Text(parts):
             return h.p[(render_part(x) for x in parts)]
-        case List(items):
+        case BulletList(items):
             return h.ul[(h.li[(render_part(x) for x in item.parts)] for item in items)]
 
 

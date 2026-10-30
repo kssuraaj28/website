@@ -26,11 +26,11 @@ class Text:
     parts: list[TextPart]
 
 @dataclass(frozen=True)
-class List:
+class BulletList:
     items: list[Text]
 
 
-SectionComponent = Text | List
+SectionComponent = Text | BulletList
 
 
 @dataclass(frozen=True)
