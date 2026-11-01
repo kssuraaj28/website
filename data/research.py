@@ -84,9 +84,8 @@ cr2 = [
 # Change types to Sequence or something
 intro: list[SectionComponent] = [
     Text(['We can only build secure and trustworthy systems if we know what secure and trustworthy means. '
-          'In a nutshell, my research is about finding and enforcing the right specifications for computer systems. ']),
-
-    Text(["I'm currently working on the following projects:"]),
-]
+          'In a nutshell, my research is about finding and enforcing the right specifications for computer systems. '
+           "I'm currently working on the following projects:"
+          ]),]
 
 this_section = Section("Research", intro + nmif + aispec + cr2)
