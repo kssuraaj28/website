@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data_model import Bold, BulletList, Section, Text, Link
+from data_model import Bold, BulletList, Section, Text
 
 
 @dataclass(frozen=True)

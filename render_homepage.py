@@ -89,6 +89,7 @@ def render_homepage(page: MainPage, site_title: str):
     main_style = dict_to_css_style({
         # I think that grid might be better. Maybe refactor later
         "margin-left": SIDEBAR_WIDTH,  # leave room for the fixed sidebar
+        "margin-right": SIDEBAR_WIDTH,  # TODO: Maybe cap it by something??
         "padding": "16px",
     })
 

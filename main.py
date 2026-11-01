@@ -1,6 +1,5 @@
 #!/usr/bin/env -S uv run
 """Build the static site into dist/. Every page is a Page built from the vocabulary in data_model.py."""
-from data import about, teaching
 import shutil
 from pathlib import Path
 
@@ -11,7 +10,8 @@ OUT = Path("dist")
 SITE_TITLE = "Suraaj's webpage"
 
 # Each module in data/ defines this_section. Listed in display order.
-SECTIONS = [m.this_section for m in [about, teaching]]
+from data import about, teaching, talks, research, pubs, software, fun, blog
+SECTIONS = [m.this_section for m in [about, research, pubs, teaching, talks, software]]
 
 
 def main():
