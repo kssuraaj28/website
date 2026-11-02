@@ -127,9 +127,10 @@ The browser fills in what a server would normally provide:
 DevTools still lists file:// loads in the Network tab, but there's no real traffic behind them. Some browsers show a made-up status like 200 or "Finished."
 
 # TODO
-Fix -- and ---
+assets
+dist -> _dist
 Mobile layout. Media queries.
+Homepage has my name hardcoded
 write_text does not set an encoding
-switch everything to tuples
 Add a readme
 Favicon

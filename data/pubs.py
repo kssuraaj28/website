@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data_model import BulletList, Section, Text
+from data_model import Bold, BulletList, Section, Text
 
 
 @dataclass(frozen=True)
@@ -11,14 +11,14 @@ class Publication:
 
 
 def to_text(pub: Publication) -> Text:
-    return Text((pub.name,))
+    return Text((Bold(pub.name),))
 
 
 # TODO s
 # Author affliation
 # Talk # Paper # Slides
 optane_sec = Publication("Side-Channel Attacks on Optane Persistent Memory",
-                         "USENIX security '23",
+                         "USENIX Security '23",
                          ("Sihang Liu",
                           "Suraaj Kanniwadi",
                           "Martin Schwarzl",
@@ -26,7 +26,7 @@ optane_sec = Publication("Side-Channel Attacks on Optane Persistent Memory",
                           "Daniel Gruss",
                           "Samira Khan"))
 
-cr2 = Publication("CR2: Chain Replication Revisited",
+cr2 = Publication("CR²: Chain Replication Revisited",
                   "In submission",
                   ("Suraaj Kanniwadi",
                    "Yacqub Mohamed",
@@ -40,7 +40,7 @@ typeconf = Publication("Type Confusion Security",
                         "Hanxi Chen",
                         "Andrew Myers"))
 
-nmif = Publication("Demystifying Information Flow Downgrading using the Real--Ideal Paradigm",
+nmif = Publication("Demystifying Information Flow Downgrading using the Real–Ideal Paradigm",
                    "In submission",
                    ("Suraaj Kanniwadi", "Andrew Myers"))
 

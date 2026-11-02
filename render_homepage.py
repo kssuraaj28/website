@@ -28,8 +28,8 @@ def render_part(part: TextPart):
             return txt
         case Bold(text):
             return h.strong[text]
-        case Link(text, url):
-            return h.a(href=url, style=LINK_STYLE)[text]
+        case Link(text, link):
+            return h.a(href=link.url, style=LINK_STYLE)[text]
 
 
 def render_component(component: SectionComponent):

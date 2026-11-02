@@ -6,10 +6,10 @@ from urllib.parse import urlsplit
 class Bold:
     text: str
 
+
 @dataclass(frozen=True)
-class Link:
-    text: str
-    url: str  # external only, for now
+class ExternalUrl:
+    url: str
 
    # dataclasses run __post_init__ right after init
     def __post_init__(self):
@@ -18,6 +18,10 @@ class Link:
             raise ValueError(
                 f"Link url must be a full http(s) URL, got {self.url!r}")
 
+@dataclass(frozen=True)
+class Link:
+    text: str
+    url: ExternalUrl
 
 TextPart = str | Bold | Link
 

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from data import useful_links
-from data_model import Bold, Link, Section, SectionComponent, Text
+from data_model import Bold, ExternalUrl, Link, Section, Text, TextPart
 
 
 @dataclass(frozen=True)
@@ -11,10 +11,10 @@ class ResearchTopic:
     collabs: tuple[Link, ...]
 
 
-def to_text(topic) -> tuple[Text, ...]:
+def to_text(topic: ResearchTopic) -> tuple[Text, ...]:
     heading = Text((Bold(topic.heading),))
 
-    ending = ["Joint work with ", ]
+    ending : list[TextPart] = ["Joint work with ", ]
 
     match topic.collabs:
         case ():
@@ -28,29 +28,28 @@ def to_text(topic) -> tuple[Text, ...]:
         case (a, b, c):
             ending.extend((a, ', ', b, ', and ', c, '.'))
 
-        case _: #TODO: Implement this.
+        case _:  # TODO: Implement this.
             raise RuntimeError("Unimplemented")
-    
 
     return (heading, topic.body, Text(tuple(ending)))
 
 
 nmif = ResearchTopic(
-    "Real–ideal semantic foundations for language based security",
+    "Real–ideal semantic foundations for language-based security",
     Text((
         "Existing security properties such as noninterference are too simplistic; "
         "they cannot capture the security requirements of practical systems, "
         "which often have intertwined confidentiality and integrity requirements. "
         "Our insight is to adapt the ",
-        Link('real--ideal paradigm',
-             'https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/GMW87/GMW87.pdf'),
+        Link('real–ideal paradigm',
+             ExternalUrl('https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/GMW87/GMW87.pdf')),
         " from cryptography to give simple and expressive security specifications for computer systems. "
         "This has been quite successful. "
         "Using this paradigm, we have been able to provide "
-        "simple semantic definitions of important---but less understood---"
-        "security properties (such as nonmalleable information flow, robust declassification, and confused deputy attacks). "
+        "simple semantic definitions of important—but less understood—"
+        "security properties (such as nonmalleable information flow, robust declassification, and confused deputy attack security). "
         "In fact, we show that even syntactic type soundness theorems for information-flow type systems are presented best as "
-        "real--ideal statements.",)),
+        "real–ideal statements.",)),
     (useful_links.andru, useful_links.silei, useful_links.hanxi))
 
 aispec = ResearchTopic(
@@ -59,13 +58,13 @@ aispec = ResearchTopic(
     Text((
         "Using AI is exhilarating. Its lack of guarantees is also terrifying. "
         # "it's not fun when the production database gets deleted"
-        "We believe that the right interaction model is to combine LLM prompting "
+        "The right interaction model with AI must be to combine LLM prompting "
         "with techniques from programming languages and formal methods. "
         "We are designing simple, easily auditable, refinable, and enforceable specification languages "
         "to constrain AI execution to give users functionality and security guarantees. "
-        "AI can itself generate such specifications, lifting significant user burden; "
+        "Moreover, AI can itself generate such specifications, lifting significant user burden; "
         "a user only needs to audit the generated specification. "
-        "Moreover, AI's remarkable ability to write formal proofs can even automate specification refinement! "
+        "Additionally, AI's remarkable ability to write formal proofs can even automate specification refinement! "
         "Such an interaction model is an important step in a future where we use our AI superpowers more responsibly. "
         "Because, with great power comes great responsibility. ",)),
 
