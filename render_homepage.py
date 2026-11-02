@@ -107,7 +107,7 @@ def render_homepage(page: MainPage, site_title: str):
             "border": "none",
             "border-top": "2px solid black",
         })),
-
+        # TODO: These are relative links. Fix them
         [h.p[h.a(href=f"#{html_sec_id(i)}", style=LINK_STYLE)[sec.title]]
          for i, sec in numbered],
     ]
