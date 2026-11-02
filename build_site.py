@@ -4,6 +4,7 @@ import argparse
 import shutil
 from pathlib import Path
 
+from cur_dir import ROOT
 from data_model import MainPage
 from paths import SitePath
 from render_homepage import render_homepage
@@ -23,8 +24,7 @@ def parse_base(arg: str) -> SitePath:
     return SitePath(tuple(stripped.split("/")) if stripped else ())
 
 
-# TODO: Script relative?
-OUT = Path("_dist")
+OUT = ROOT / "_dist"
 def clean_dist():
     # Start from an empty output directory, so that no stale files get deployed.
     shutil.rmtree(OUT, ignore_errors=True)
