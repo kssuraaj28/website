@@ -4,7 +4,7 @@ from data_model import ExternalUrl, Link, Section, Text
 
 para = Text((
     "I am presently a computer science graduate student at ", useful_links.cornell, '. ',
-    "My research interests lie broadly in systems (real broad, I know!). "
+    "My research interests lie broadly in building trustworthy computer systems. "
     "Problems relating to formal specifications, security, extensibility and programmability appeal to me in particular. ",
     "I am fortunate to be advised by ", useful_links.andru, " and ",
     useful_links.rvr, " to pursue my interests. ",
