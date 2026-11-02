@@ -6,7 +6,7 @@ from dataclasses import dataclass
 # A sequence of validated URL path segments.
 # You can use this for a lot of places, like basename, absolute paths, relative paths, etc.
 @dataclass(frozen=True)
-class SitePath:
+class SanitizedPath:
     content: tuple[str, ...]
 
     def __post_init__(self):
@@ -17,5 +17,5 @@ class SitePath:
                 raise ValueError(f"Invalid path segment: {seg!r}")
 
 
-def join(p1: SitePath, p2: SitePath) -> SitePath:
-    return SitePath(p1.content + p2.content)
+def join(p1: SanitizedPath, p2: SanitizedPath) -> SanitizedPath:
+    return SanitizedPath(p1.content + p2.content)

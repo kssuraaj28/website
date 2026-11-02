@@ -3,7 +3,7 @@ from data import about, teaching, talks, research, pubs, software, fun, blog
 import argparse
 
 from data_model import MainPage
-from paths import SitePath
+from paths import SanitizedPath
 from construct_site import construct_site
 
 
@@ -12,19 +12,19 @@ SECTIONS = tuple(m.this_section for m in [
                  about, research, teaching,  software])
 
 
-def parse_base(arg: str) -> SitePath:
+def parse_base(arg: str) -> SanitizedPath:
     # "/" -> ()
     # "website" -> ("website",)
     # "website/a" -> ("website", "a")
     stripped = arg.strip("/")
-    return SitePath(tuple(stripped.split("/")) if stripped else ())
+    return SanitizedPath(tuple(stripped.split("/")) if stripped else ())
 
 def main():
     parser = argparse.ArgumentParser()
     # argparse turns a ValueError from parse_base into a usage error.
-    parser.add_argument("--base", type=parse_base, default=SitePath(()),
+    parser.add_argument("--base", type=parse_base, default=SanitizedPath(()),
                         help='where the site is hosted, e.g. "website" (default: the domain root)')
-    base: SitePath = parser.parse_args().base
+    base: SanitizedPath = parser.parse_args().base
 
     construct_site(base, MainPage("Suraaj's Webpage", SECTIONS))
 
