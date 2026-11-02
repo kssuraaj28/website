@@ -26,7 +26,7 @@ def to_text(topic) -> tuple[Text, ...]:
             ending.extend((a, ' and ', b, '.'))
 
         case (a, b, c):
-            ending.extend((a, ',', b, ', and', c, '.'))
+            ending.extend((a, ', ', b, ', and ', c, '.'))
 
         case _: #TODO: Implement this.
             raise RuntimeError("Unimplemented")
@@ -79,8 +79,6 @@ cr2 = ResearchTopic(
         "It turns out that this is not fundamental: a chain replicated service can reconfigure itself, for example after a failure. "
         "The new protocol also addresses certain inefficiencies in the original protocol, such as latency increasing with chain length. ",)), (useful_links.rvr, useful_links.fbs, useful_links.yacqub))
 
-# The typechecker almost killed me. TODO
-# Change types to Sequence or something
 intro = Text(('We can only build secure and trustworthy systems if we know what secure and trustworthy means. '
               'In a nutshell, my research is about finding and enforcing the right specifications for computer systems. '
               "I'm currently working on the following projects:",

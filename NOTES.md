@@ -132,3 +132,4 @@ Mobile layout. Media queries.
 write_text does not set an encoding
 switch everything to tuples
 Add a readme
+Favicon
