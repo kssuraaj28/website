@@ -2,12 +2,22 @@
 
 import htpy as h
 import shutil
+from pathlib import PurePosixPath
 from cur_dir import ROOT
-from data_model import ASSETS, ExternalUrl, LocalAsset
+from data_model import ASSETS, ExternalUrl, Image, LocalAsset
 from paths import SanitizedPath
 
 from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, WebText, TextPart
 
+BASE = SanitizedPath(())  # Set once by construct_site, before anything renders
+def construct_site(base: SanitizedPath, page: MainPage):
+    global BASE
+    BASE = base
+    clean_dist()
+    html = render_homepage(page)
+    install_dist(str(html))
+
+#TODO: The rest of the methods in this class are private
 
 def dict_to_css_style(props: dict[str, str]) -> str:
     """{"margin": "0", "display": "grid"} -> "margin: 0; display: grid;" """
@@ -63,6 +73,43 @@ SIDEBAR_COLOR = '#e8e4c9'
 SIDEBAR_WIDTH = '25vw'  # vw -> viewport width
 
 
+HTML_ASSETS = "assets"  # The assets folder under the site root, in URLs and in _dist
+
+
+DISTOUT = ROOT / "_dist"
+
+def clean_dist():
+    # Start from an empty output directory, so that no stale files get deployed.
+    shutil.rmtree(DISTOUT, ignore_errors=True)
+    DISTOUT.mkdir()
+
+
+def install_dist(index_html: str):
+    site_root = DISTOUT.joinpath(*BASE.content)
+    site_root.mkdir(parents=True, exist_ok=True)
+    path = site_root / "index.html"
+    path.write_text(index_html, encoding='utf-8')
+    shutil.copytree(ASSETS, site_root / HTML_ASSETS)
+
+
+def local_asset_html_url(asset: LocalAsset) -> str:
+    # PurePosixPath only uses /
+    url = (PurePosixPath("/", *BASE.content) / HTML_ASSETS
+           / PurePosixPath(*asset.path.content))
+    return str(url)
+
+
+def render_image(image: Image):
+    style = dict_to_css_style({
+        "display": "block",  # Images are inline by default, which adds a gap below
+        "object-position": "top",  # From the top
+        "width": "100%",
+        "height": "30vh",  # Same height as the old placeholder
+        "object-fit": "cover",  # Fill the box without stretching
+    })
+    return h.img(src=local_asset_html_url(image.asset), alt=image.alt, style=style)
+
+
 def render_homepage(page: MainPage):
     # (index, section) pairs, shared by the sidebar links and main so the ids always match.
     numbered = list(enumerate(page.sections, start=1))
@@ -104,8 +151,7 @@ def render_homepage(page: MainPage):
     # When you give heights as percent, you need to know the parent's height.
     # If the parent's height is unknown, a percent height just becomes auto
     sidebar = h.aside(style=sidebar_style)[
-        h.div(style=dict_to_css_style(
-            {"height": "30vh", "background-color": "lightblue"}))["A fake image"],
+        render_image(page.headshot),
         # I think that you don't need the * either
         *(render_component(t) for t in page.sidetext),
 
@@ -126,24 +172,3 @@ def render_homepage(page: MainPage):
     return h.html(lang="en")[head, body]
 
 
-DISTOUT = ROOT / "_dist"
-
-
-def construct_site(base: SanitizedPath, page: MainPage):
-    clean_dist()
-    html = render_homepage(page)
-    install_dist(base, str(html))
-
-
-def clean_dist():
-    # Start from an empty output directory, so that no stale files get deployed.
-    shutil.rmtree(DISTOUT, ignore_errors=True)
-    DISTOUT.mkdir()
-
-
-def install_dist(base: SanitizedPath, index_html: str):
-    site_root = DISTOUT.joinpath(*base.content)
-    site_root.mkdir(parents=True, exist_ok=True)
-    path = site_root / "index.html"
-    path.write_text(index_html, encoding='utf-8')
-    shutil.copytree(ASSETS, site_root / ASSETS.name)
