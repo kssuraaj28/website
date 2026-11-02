@@ -15,9 +15,10 @@ If you were on /about, it would be /link.
 # Website discipline
 - For my website, I'm going to maintain very strict link discipline.
 - To start, I will only have one html page. No blog / fun to start.
-- Hrefs will always be fully qualified (no `about`, `about/`, `/about/`, etc.). 
+- Hrefs links will always be fully qualified (no `about`, `about/`, `/about/`, etc.). 
   + Change this when you add images.
   + And when you add a blog, etc.
+- However, the one exception to this is local section ids. Here, relative is okay. TODO: Not a great idea to have exception.
 
 ## Eventually
   + Every link on my website is going to be /<base>/....

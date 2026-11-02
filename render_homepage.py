@@ -107,7 +107,8 @@ def render_homepage(page: MainPage, site_title: str):
             "border": "none",
             "border-top": "2px solid black",
         })),
-        # TODO: These are relative links. Fix them
+        # You don't need to have absolute links for #id.
+        # The browser stays on the same page.
         [h.p[h.a(href=f"#{html_sec_id(i)}", style=LINK_STYLE)[sec.title]]
          for i, sec in numbered],
     ]
