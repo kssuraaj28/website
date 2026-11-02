@@ -125,3 +125,10 @@ The browser fills in what a server would normally provide:
 - Folders: the browser shows its own directory listing.
 
 DevTools still lists file:// loads in the Network tab, but there's no real traffic behind them. Some browsers show a made-up status like 200 or "Finished."
+
+# TODO
+Fix -- and ---
+Mobile layout. Media queries.
+write_text does not set an encoding
+switch everything to tuples
+Add a readme

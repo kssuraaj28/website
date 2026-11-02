@@ -15,7 +15,7 @@ class CourseTeaching:
         possible_sem = ('Fall', 'Spring', 'Summer', 'Winter')
         # TODO: Vet course numbers?
         if self.sem not in possible_sem:
-            raise ValueError(f"sem must be in {possible_sem}. Get {self.sem}")
+            raise ValueError(f"sem must be in {possible_sem}. Got {self.sem}")
 
 
 def course_to_text(c: CourseTeaching) -> Text:

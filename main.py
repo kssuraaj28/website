@@ -1,5 +1,4 @@
 #!/usr/bin/env -S uv run
-"""Build the static site into dist/. Every page is a Page built from the vocabulary in data_model.py."""
 import shutil
 from pathlib import Path
 

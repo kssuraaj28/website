@@ -1,24 +1,10 @@
 from dataclasses import dataclass
 
 from data import useful_links
-from data_model import Bold, Section, SectionComponent, Text
+from data_model import Bold, Link, Section, SectionComponent, Text
 
 
-@dataclass(frozen=True)
-class ResearchTopic:
-    topic: str
-    name: str
-    role: str
-    sem: str
-    year: int
-
-    def __post_init__(self):
-        possible_sem = ('Fall', 'Spring', 'Summer', 'Winter')
-        # TODO: Vet course numbers?
-        if self.sem not in possible_sem:
-            raise ValueError(f"sem must be in {possible_sem}. Get {self.sem}")
-
-
+#TODO: This pattern can be abstracted out
 nmif = [
     Text([Bold("Real–ideal semantic foundations for language based security ")]),
 
@@ -26,7 +12,8 @@ nmif = [
         "Existing security properties such as noninterference are too simplistic; "
         "they cannot capture the security requirements of practical systems, "
         "which often have intertwined confidentiality and integrity requirements. "
-        "Our insight is to adapt the ", useful_links.realideal,
+        "Our insight is to adapt the ", 
+        Link('real--ideal paradigm','https://www.math.ias.edu/~avi/PUBLICATIONS/MYPAPERS/GMW87/GMW87.pdf'),
         " from cryptography to give simple and expressive security specifications for computer systems. "
         "This has been quite successful. "
         "Using this paradigm, we have been able to provide "
@@ -69,8 +56,8 @@ cr2 = [
     Text([Bold("Self-managing chain replication")]),
 
     Text([
-        "The original chain replication protocol has been in use in many companies and research projects."
-        "One downside of chain replication is that it it cannot stand on its own and requires a configuration service. "
+        "The original chain replication protocol has been in use in many companies and research projects. "
+        "One downside of chain replication is that it cannot stand on its own and requires a configuration service. "
         "It turns out that this is not fundamental: a chain replicated service can reconfigure itself, for example after a failure. "
         "The new protocol also addresses certain inefficiencies in the original protocol, such as latency increasing with chain length. ",]),
 
