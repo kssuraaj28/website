@@ -12,7 +12,7 @@ class SanitizedPath:
     def __post_init__(self):
         for seg in self.content:
             # Heavy sanitization
-            if not re.fullmatch(r"[a-z0-9._-]+", seg) or seg in (".", ".."):
+            if not re.fullmatch(r"[a-z0-9._~-]+", seg) or seg in (".", ".."):
                 # !r calls repr instead
                 raise ValueError(f"Invalid path segment: {seg!r}")
 
