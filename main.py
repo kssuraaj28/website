@@ -1,16 +1,13 @@
 #!/usr/bin/env -S uv run
 
-from data import about, teaching, talks, research, pubs, software, fun, blog
 import argparse
 
-from data_model import MainPage, WebText
+from data_model import Image, LocalAsset, MainPage, WebText
 from paths import SanitizedPath
 from construct_site import construct_site
 
 
 # Each module in data/ defines this_section. Listed in display order.
-SECTIONS = tuple(m.this_section for m in [
-                 about, research, teaching,  software])
 
 
 def parse_base(arg: str) -> SanitizedPath:
@@ -28,6 +25,9 @@ def main():
                         help='where the site is hosted, e.g. "website" (default: the domain root)')
     base: SanitizedPath = parser.parse_args().base
 
+    from data import about, teaching, talks, research, pubs, software, fun, blog
+    sections = tuple(m.this_section for m in [
+                     about, research, teaching,  software])
     side = (
         WebText(("Suraaj Kanniwadi",)),
         WebText(("Ph.D. Candidate",)),
@@ -35,7 +35,11 @@ def main():
         WebText(("Cornell University",)),
     )
 
-    construct_site(base, MainPage("Suraaj's Webpage", side, SECTIONS))
+    # TODO: Can we have coercion? This is a little painful
+    img = Image(LocalAsset(SanitizedPath(("photo.jpg",))),
+                "Photo of Suraaj")  # I wanted to write 'handsome man'
+
+    construct_site(base, MainPage("Suraaj's Webpage", img, side, sections))
 
 
 if __name__ == "__main__":

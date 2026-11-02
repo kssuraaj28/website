@@ -37,6 +37,12 @@ class LocalAsset:
             raise ValueError(f"Asset is not a file: {full}")
 
 
+@dataclass(frozen=True)
+class Image:
+    asset: LocalAsset  # No url for now
+    alt: str
+
+
 LinkTarget = ExternalUrl | LocalAsset
 
 
@@ -71,5 +77,6 @@ class Section:
 @dataclass(frozen=True)
 class MainPage:
     title: str
+    headshot: Image
     sidetext: tuple[WebText, ...]
     sections: tuple[Section, ...]
