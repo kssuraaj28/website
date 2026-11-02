@@ -14,7 +14,7 @@ class ResearchTopic:
 def to_text(topic: ResearchTopic) -> tuple[WebText, ...]:
     heading = WebText((Bold(topic.heading),))
 
-    ending : list[TextPart] = ["Joint work with ", ]
+    ending: list[TextPart] = ["Joint work with ", ]
 
     match topic.collabs:
         case ():
@@ -79,9 +79,9 @@ cr2 = ResearchTopic(
         "The new protocol also addresses certain inefficiencies in the original protocol, such as latency increasing with chain length. ",)), (useful_links.rvr, useful_links.fbs, useful_links.yacqub))
 
 intro = WebText(('We can only build secure and trustworthy systems if we know what secure and trustworthy means. '
-              'In a nutshell, my research is about finding and enforcing the right specifications for computer systems. '
-              "I'm currently working on the following projects:",
-              ))
+                 'In a nutshell, my research is about finding and enforcing the right specifications for computer systems. '
+                 "I'm currently working on the following projects:",
+                 ))
 
 this_section = Section(
     "Research", (intro, *to_text(nmif), *to_text(aispec), *to_text(cr2)))
