@@ -42,4 +42,5 @@ class Section:
 
 @dataclass(frozen=True)
 class MainPage:
+    title : str
     sections: tuple[Section, ...]

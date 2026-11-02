@@ -57,14 +57,14 @@ SIDEBAR_COLOR = '#e8e4c9'
 SIDEBAR_WIDTH = '25vw'  # vw -> viewport width
 
 
-def render_homepage(page: MainPage, site_title: str):
+def render_homepage(page: MainPage):
     # (index, section) pairs, shared by the sidebar links and main so the ids always match.
     numbered = list(enumerate(page.sections, start=1))
 
     head = h.head[
         h.meta(charset="utf-8"),
         h.meta(name="viewport", content="width=device-width, initial-scale=1"),
-        h.title[site_title],
+        h.title[page.title],
     ]
 
     body_style = dict_to_css_style({
@@ -123,9 +123,9 @@ def render_homepage(page: MainPage, site_title: str):
 DISTOUT = ROOT / "_dist"
 ASSETS = ROOT / 'assets' # TODO: This should be somewhere else
 
-def construct_site(base: SitePath, page: MainPage, site_title: str):
+def construct_site(base: SitePath, page: MainPage):
     clean_dist()
-    html =  render_homepage(page, site_title)
+    html =  render_homepage(page)
     install_dist(base, str(html))
 
 def clean_dist():

@@ -26,9 +26,7 @@ def main():
                         help='where the site is hosted, e.g. "website" (default: the domain root)')
     base: SitePath = parser.parse_args().base
 
-    # TODO: This should not be hardcoded
-    SITE_TITLE = "Suraaj's webpage"
-    construct_site(base, MainPage(SECTIONS), SITE_TITLE)
+    construct_site(base, MainPage("Suraaj's Webpage", SECTIONS))
 
 
 if __name__ == "__main__":
