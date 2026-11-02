@@ -1,7 +1,7 @@
-from data_model import ExternalUrl, Link, Section, Text
+from data_model import ExternalUrl, Link, Section, WebText
 
 
-text = Text(
+text = WebText(
     ("My ", Link("Github account", ExternalUrl("https://github.com/kssuraaj28")),
      " has a bunch of software I've written over the years. "
      "This includes ", Link("my vim configuration ",

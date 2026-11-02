@@ -3,7 +3,7 @@
 from data import about, teaching, talks, research, pubs, software, fun, blog
 import argparse
 
-from data_model import MainPage, Text
+from data_model import MainPage, WebText
 from paths import SanitizedPath
 from construct_site import construct_site
 
@@ -29,10 +29,10 @@ def main():
     base: SanitizedPath = parser.parse_args().base
 
     side = (
-        Text(("Suraaj Kanniwadi",)),
-        Text(("Ph.D. Candidate",)),
-        Text(("Department of Computer Science",)),
-        Text(("Cornell University",)),
+        WebText(("Suraaj Kanniwadi",)),
+        WebText(("Ph.D. Candidate",)),
+        WebText(("Department of Computer Science",)),
+        WebText(("Cornell University",)),
     )
 
     construct_site(base, MainPage("Suraaj's Webpage", side, SECTIONS))

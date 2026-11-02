@@ -1,3 +1,3 @@
-from data_model import Section, Text
+from data_model import Section, WebText
 
-this_section = Section("Fun", (Text(("Brown fox or something",)),))
+this_section = Section("Fun", (WebText(("Brown fox or something",)),))

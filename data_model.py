@@ -30,16 +30,16 @@ TextPart = str | Bold | Link
 
 
 @dataclass(frozen=True)
-class Text:
+class WebText:
     parts: tuple[TextPart, ...]  # A tuple of any length
 
 
 @dataclass(frozen=True)
 class BulletList:
-    items: tuple[Text, ...]
+    items: tuple[WebText, ...]
 
 
-SectionComponent = Text | BulletList
+SectionComponent = WebText | BulletList
 
 
 @dataclass(frozen=True)
@@ -51,5 +51,5 @@ class Section:
 @dataclass(frozen=True)
 class MainPage:
     title: str
-    sidetext: tuple[Text, ...]
+    sidetext: tuple[WebText, ...]
     sections: tuple[Section, ...]

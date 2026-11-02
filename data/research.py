@@ -1,18 +1,18 @@
 from dataclasses import dataclass
 
 from data import useful_links
-from data_model import Bold, ExternalUrl, Link, Section, Text, TextPart
+from data_model import Bold, ExternalUrl, Link, Section, WebText, TextPart
 
 
 @dataclass(frozen=True)
 class ResearchTopic:
     heading: str
-    body: Text
+    body: WebText
     collabs: tuple[Link, ...]
 
 
-def to_text(topic: ResearchTopic) -> tuple[Text, ...]:
-    heading = Text((Bold(topic.heading),))
+def to_text(topic: ResearchTopic) -> tuple[WebText, ...]:
+    heading = WebText((Bold(topic.heading),))
 
     ending : list[TextPart] = ["Joint work with ", ]
 
@@ -31,12 +31,12 @@ def to_text(topic: ResearchTopic) -> tuple[Text, ...]:
         case _:  # TODO: Implement this.
             raise RuntimeError("Unimplemented")
 
-    return (heading, topic.body, Text(tuple(ending)))
+    return (heading, topic.body, WebText(tuple(ending)))
 
 
 nmif = ResearchTopic(
     "Real–ideal semantic foundations for language-based security",
-    Text((
+    WebText((
         "Existing security properties such as noninterference are too simplistic; "
         "they cannot capture the security requirements of practical systems, "
         "which often have intertwined confidentiality and integrity requirements. "
@@ -55,7 +55,7 @@ nmif = ResearchTopic(
 aispec = ResearchTopic(
     "Enforcing auditable specifications for AI prompts",
 
-    Text((
+    WebText((
         "Using AI is exhilarating. Its lack of guarantees is also terrifying. "
         # "it's not fun when the production database gets deleted"
         "The right interaction model with AI must be to combine LLM prompting "
@@ -72,13 +72,13 @@ aispec = ResearchTopic(
 
 cr2 = ResearchTopic(
     "Self-managing chain replication",
-    Text((
+    WebText((
         "The original chain replication protocol has been in use in many companies and research projects. "
         "One downside of chain replication is that it cannot stand on its own and requires a configuration service. "
         "It turns out that this is not fundamental: a chain replicated service can reconfigure itself, for example after a failure. "
         "The new protocol also addresses certain inefficiencies in the original protocol, such as latency increasing with chain length. ",)), (useful_links.rvr, useful_links.fbs, useful_links.yacqub))
 
-intro = Text(('We can only build secure and trustworthy systems if we know what secure and trustworthy means. '
+intro = WebText(('We can only build secure and trustworthy systems if we know what secure and trustworthy means. '
               'In a nutshell, my research is about finding and enforcing the right specifications for computer systems. '
               "I'm currently working on the following projects:",
               ))

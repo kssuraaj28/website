@@ -1,5 +1,5 @@
-from data_model import Section, Text
+from data_model import Section, WebText
 
 this_section = Section(
     "Talks",
-    (Text(("Brown fox or something",)),)) # This syntax is terrible
+    (WebText(("Brown fox or something",)),)) # This syntax is terrible

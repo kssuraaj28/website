@@ -1,6 +1,6 @@
-from data_model import Section, Text
+from data_model import Section, WebText
 
-this_section = Section("Blog", (Text(("Brown fox or something",)),))
+this_section = Section("Blog", (WebText(("Brown fox or something",)),))
 
 # How to store your passwords
 # ssreflect

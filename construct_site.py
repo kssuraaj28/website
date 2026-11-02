@@ -3,9 +3,10 @@
 import htpy as h
 import shutil
 from cur_dir import ROOT
+from local_assets import ASSETS
 from paths import SanitizedPath
 
-from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, Text, TextPart
+from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, WebText, TextPart
 
 
 def dict_to_css_style(props: dict[str, str]) -> str:
@@ -36,7 +37,7 @@ def render_part(part: TextPart):
 
 def render_component(component: SectionComponent):
     match component:
-        case Text(parts):
+        case WebText(parts):
             return h.p[(render_part(x) for x in parts)]
         case BulletList(items):
             return h.ul[(h.li[(render_part(x) for x in item.parts)] for item in items)]
@@ -122,7 +123,6 @@ def render_homepage(page: MainPage):
 
 
 DISTOUT = ROOT / "_dist"
-ASSETS = ROOT / 'assets'  # TODO: This should be somewhere else
 
 
 def construct_site(base: SanitizedPath, page: MainPage):

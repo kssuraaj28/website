@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data_model import Bold, BulletList, Section, Text
+from data_model import Bold, BulletList, Section, WebText
 
 
 @dataclass(frozen=True)
@@ -18,8 +18,8 @@ class CourseTeaching:
             raise ValueError(f"sem must be in {possible_sem}. Got {self.sem}")
 
 
-def course_to_text(c: CourseTeaching) -> Text:
-    return Text((
+def course_to_text(c: CourseTeaching) -> WebText:
+    return WebText((
         Bold(f'{c.sem} {c.year}: '),
         f'{c.role}, {c.code} ({c.name})'))  # TODO: Make this better
 
@@ -53,4 +53,4 @@ taed.reverse()
 
 this_section = Section(
     "Teaching",
-    (Text(("I've been involved with teaching the following courses at Cornell:",)), BulletList(tuple(course_to_text(c) for c in taed))))
+    (WebText(("I've been involved with teaching the following courses at Cornell:",)), BulletList(tuple(course_to_text(c) for c in taed))))

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data_model import Bold, BulletList, Section, Text
+from data_model import Bold, BulletList, Section, WebText
 
 
 @dataclass(frozen=True)
@@ -10,8 +10,8 @@ class Publication:
     authors: tuple[str, ...]  # TODO: Link?
 
 
-def to_text(pub: Publication) -> Text:
-    return Text((Bold(pub.name),))
+def to_text(pub: Publication) -> WebText:
+    return WebText((Bold(pub.name),))
 
 
 # TODO s
