@@ -5,5 +5,5 @@ script_dir="$( cd "$( dirname "$(realpath "${BASH_SOURCE[0]}")" )" >/dev/null 2>
 cd "$script_dir"
 
 uv run pyright
-uv run build_site.py
+uv run build_site.py --base mybase
 uv run python -m http.server -d _dist
