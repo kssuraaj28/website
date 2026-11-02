@@ -29,7 +29,7 @@ def to_text(topic: ResearchTopic) -> tuple[WebText, ...]:
             ending.extend((a, ', ', b, ', and ', c, '.'))
 
         case _:  # TODO: Implement this.
-            raise RuntimeError("Unimplemented")
+            raise NotImplementedError
 
     return (heading, topic.body, WebText(tuple(ending)))
 

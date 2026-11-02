@@ -25,6 +25,7 @@ class ExternalUrl:
 
 ASSETS = ROOT / 'assets'
 
+
 @dataclass(frozen=True)
 class LocalAsset:
     path: SanitizedPath
@@ -35,10 +36,14 @@ class LocalAsset:
         if not full.is_file():
             raise ValueError(f"Asset is not a file: {full}")
 
+
+LinkTarget = ExternalUrl | LocalAsset
+
+
 @dataclass(frozen=True)
 class Link:
     text: str
-    target: ExternalUrl
+    target: LinkTarget
 
 
 TextPart = str | Bold | Link

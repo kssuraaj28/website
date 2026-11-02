@@ -3,7 +3,7 @@
 import htpy as h
 import shutil
 from cur_dir import ROOT
-from data_model import ASSETS
+from data_model import ASSETS, ExternalUrl, LocalAsset
 from paths import SanitizedPath
 
 from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, WebText, TextPart
@@ -32,7 +32,11 @@ def render_part(part: TextPart):
         case Bold(text):
             return h.strong[text]
         case Link(text, link):
-            return h.a(href=link.url, style=LINK_STYLE)[text]
+            match link:
+                case ExternalUrl(url):
+                    return h.a(href=url, style=LINK_STYLE)[text]
+                case LocalAsset(_):
+                    raise NotImplementedError
 
 
 def render_component(component: SectionComponent):
