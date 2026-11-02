@@ -10,6 +10,8 @@ from paths import SanitizedPath
 from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, WebText, TextPart
 
 BASE = SanitizedPath(())  # Set once by construct_site, before anything renders
+
+
 def construct_site(base: SanitizedPath, page: MainPage):
     global BASE
     BASE = base
@@ -17,7 +19,8 @@ def construct_site(base: SanitizedPath, page: MainPage):
     html = render_homepage(page)
     install_dist(str(html))
 
-#TODO: The rest of the methods in this class are private
+# TODO: The rest of the methods in this class are private
+
 
 def dict_to_css_style(props: dict[str, str]) -> str:
     """{"margin": "0", "display": "grid"} -> "margin: 0; display: grid;" """
@@ -78,6 +81,7 @@ HTML_ASSETS = "assets"  # The assets folder under the site root, in URLs and in 
 
 DISTOUT = ROOT / "_dist"
 
+
 def clean_dist():
     # Start from an empty output directory, so that no stale files get deployed.
     shutil.rmtree(DISTOUT, ignore_errors=True)
@@ -99,17 +103,6 @@ def local_asset_html_url(asset: LocalAsset) -> str:
     return str(url)
 
 
-def render_image(image: Image):
-    style = dict_to_css_style({
-        "display": "block",  # Images are inline by default, which adds a gap below
-        "object-position": "top",  # From the top
-        "width": "100%",
-        "height": "30vh",  # Same height as the old placeholder
-        "object-fit": "cover",  # Fill the box without stretching
-    })
-    return h.img(src=local_asset_html_url(image.asset), alt=image.alt, style=style)
-
-
 def render_homepage(page: MainPage):
     # (index, section) pairs, shared by the sidebar links and main so the ids always match.
     numbered = list(enumerate(page.sections, start=1))
@@ -125,6 +118,7 @@ def render_homepage(page: MainPage):
         "font-family": BODY_FONT,
         "background-color": BODY_COLOR,
         "color": "black",  # Color of text
+        "font-size": "112.5%"  # Default Font size
     })
 
     sidebar_style = dict_to_css_style({
@@ -148,10 +142,22 @@ def render_homepage(page: MainPage):
         "padding": "16px",
     })
 
+    headshotstyle = dict_to_css_style({
+        "display": "block",  # Images are inline by default, which adds a gap below
+        "object-position": "top",  # From the top
+        "width": "80%",
+        "height": "30vh",  # Same height as the old placeholder
+        "object-fit": "cover",  # Fill the box without stretching
+        "margin": "0 auto",
+    })
+
+    headshot = h.img(src=local_asset_html_url(page.headshot.asset),
+                     alt=page.headshot.alt, style=headshotstyle)
+
     # When you give heights as percent, you need to know the parent's height.
     # If the parent's height is unknown, a percent height just becomes auto
     sidebar = h.aside(style=sidebar_style)[
-        render_image(page.headshot),
+        headshot,
         # I think that you don't need the * either
         *(render_component(t) for t in page.sidetext),
 
@@ -170,5 +176,3 @@ def render_homepage(page: MainPage):
     body = h.body(style=body_style)[sidebar, main]
 
     return h.html(lang="en")[head, body]
-
-
