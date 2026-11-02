@@ -21,7 +21,7 @@ class ExternalUrl:
 @dataclass(frozen=True)
 class Link:
     text: str
-    url: ExternalUrl
+    target: ExternalUrl
 
 TextPart = str | Bold | Link
 
