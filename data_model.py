@@ -37,6 +37,7 @@ class LocalAsset:
             raise ValueError(f"Asset is not a file: {full}")
 
 
+# TODO: Add configuration things here
 @dataclass(frozen=True)
 class Image:
     asset: LocalAsset  # No url for now
