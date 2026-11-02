@@ -3,7 +3,7 @@
 import htpy as h
 import shutil
 from cur_dir import ROOT
-from local_assets import ASSETS
+from data_model import ASSETS
 from paths import SanitizedPath
 
 from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, WebText, TextPart

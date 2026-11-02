@@ -2,6 +2,9 @@
 from dataclasses import dataclass
 from urllib.parse import urlsplit
 
+from cur_dir import ROOT
+from paths import SanitizedPath
+
 
 @dataclass(frozen=True)
 class Bold:
@@ -19,6 +22,18 @@ class ExternalUrl:
             raise ValueError(
                 f"Link url must be a full http(s) URL, got {self.url!r}")
 
+
+ASSETS = ROOT / 'assets'
+
+@dataclass(frozen=True)
+class LocalAsset:
+    path: SanitizedPath
+
+    def __post_init__(self):
+        full = ASSETS.joinpath(*self.path.content)
+        # is_file is False for both missing files and directories
+        if not full.is_file():
+            raise ValueError(f"Asset is not a file: {full}")
 
 @dataclass(frozen=True)
 class Link:
