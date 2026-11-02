@@ -36,8 +36,8 @@ SectionComponent = Text | BulletList
 @dataclass(frozen=True)
 class Section:
     title: str
-    content: list [SectionComponent]
+    content: list[SectionComponent]
 
 @dataclass(frozen=True)
 class MainPage:
-    sections: list [Section]
+    sections: list[Section]
