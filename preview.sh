@@ -6,3 +6,4 @@ cd "$script_dir"
 
 uv run pyright
 uv run build_site.py
+uv run python -m http.server -d _dist
