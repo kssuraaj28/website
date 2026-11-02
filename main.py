@@ -3,9 +3,8 @@ from data import about, teaching, talks, research, pubs, software, fun, blog
 import argparse
 
 from data_model import MainPage
-from dist import clean_dist, install_dist
 from paths import SitePath
-from render_homepage import render_homepage
+from construct_site import construct_site
 
 
 # Each module in data/ defines this_section. Listed in display order.
@@ -27,10 +26,9 @@ def main():
                         help='where the site is hosted, e.g. "website" (default: the domain root)')
     base: SitePath = parser.parse_args().base
 
-    clean_dist()
     # TODO: This should not be hardcoded
     SITE_TITLE = "Suraaj's webpage"
-    install_dist(base, str(render_homepage(MainPage(SECTIONS), SITE_TITLE)))
+    construct_site(base, MainPage(SECTIONS), SITE_TITLE)
 
 
 if __name__ == "__main__":

@@ -1,7 +1,9 @@
-"""Turns the data model into HTML. This is the only file that touches htpy."""
 # It is very weird that you can do from htpy import asfas
 
 import htpy as h
+import shutil
+from cur_dir import ROOT
+from paths import SitePath
 
 from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, Text, TextPart
 
@@ -117,3 +119,24 @@ def render_homepage(page: MainPage, site_title: str):
     body = h.body(style=body_style)[sidebar, main]
 
     return h.html(lang="en")[head, body]
+
+DISTOUT = ROOT / "_dist"
+ASSETS = ROOT / 'assets' # TODO: This should be somewhere else
+
+def construct_site(base: SitePath, page: MainPage, site_title: str):
+    clean_dist()
+    html =  render_homepage(page, site_title)
+    install_dist(base, str(html))
+
+def clean_dist():
+    # Start from an empty output directory, so that no stale files get deployed.
+    shutil.rmtree(DISTOUT, ignore_errors=True)
+    DISTOUT.mkdir()
+
+
+def install_dist(base: SitePath, index_html: str):
+    site_root = DISTOUT.joinpath(*base.content)
+    site_root.mkdir(parents=True, exist_ok=True)
+    path = site_root / "index.html"
+    path.write_text(index_html, encoding='utf-8')
+    shutil.copytree(ASSETS, site_root / ASSETS.name)
