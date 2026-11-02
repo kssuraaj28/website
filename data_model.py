@@ -1,4 +1,4 @@
-"""The document vocabulary. Pages are built only from these types."""
+#The document vocabulary. Pages are built only from these types.
 from dataclasses import dataclass
 from urllib.parse import urlsplit
 
@@ -23,21 +23,19 @@ TextPart = str | Bold | Link
 
 @dataclass(frozen=True)
 class Text:
-    parts: list[TextPart]
+    parts: tuple[TextPart, ...] # A tuple of any length
 
 @dataclass(frozen=True)
 class BulletList:
-    items: list[Text]
-
+    items: tuple[Text, ...]
 
 SectionComponent = Text | BulletList
-
 
 @dataclass(frozen=True)
 class Section:
     title: str
-    content: list[SectionComponent]
+    content: tuple[SectionComponent, ...]
 
 @dataclass(frozen=True)
 class MainPage:
-    sections: list[Section]
+    sections: tuple[Section, ...]

@@ -1,4 +1,5 @@
 from data_model import Section, Text
 
 this_section = Section(
-    "Talks", [Text(["Brown fox or something"])])
+    "Talks",
+    (Text(("Brown fox or something",)),)) # This syntax is terrible

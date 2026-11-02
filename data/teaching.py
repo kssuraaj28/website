@@ -19,9 +19,9 @@ class CourseTeaching:
 
 
 def course_to_text(c: CourseTeaching) -> Text:
-    return Text([
+    return Text((
         Bold(f'{c.sem} {c.year}: '),
-        f'{c.role}, {c.code} ({c.name})'])  # TODO: Make this better
+        f'{c.role}, {c.code} ({c.name})'))  # TODO: Make this better
 
 
 head_ta = 'Head teaching assistant'
@@ -52,4 +52,5 @@ taed = [
 taed.reverse()
 
 this_section = Section(
-    "Teaching", [Text(["I've been involved with teaching the following courses at Cornell:"]), BulletList([course_to_text(c) for c in taed])])
+    "Teaching",
+    (Text(("I've been involved with teaching the following courses at Cornell:",)), BulletList(tuple(course_to_text(c) for c in taed))))

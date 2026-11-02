@@ -10,7 +10,7 @@ SITE_TITLE = "Suraaj's webpage"
 
 # Each module in data/ defines this_section. Listed in display order.
 from data import about, teaching, talks, research, pubs, software, fun, blog
-SECTIONS = [m.this_section for m in [about, research, pubs, teaching, talks, software]]
+SECTIONS = tuple(m.this_section for m in [about, research, pubs, teaching, talks, software])
 
 
 def main():
