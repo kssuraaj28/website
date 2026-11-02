@@ -1,8 +1,9 @@
 #!/usr/bin/env -S uv run
+
 from data import about, teaching, talks, research, pubs, software, fun, blog
 import argparse
 
-from data_model import MainPage
+from data_model import MainPage, Text
 from paths import SanitizedPath
 from construct_site import construct_site
 
@@ -19,6 +20,7 @@ def parse_base(arg: str) -> SanitizedPath:
     stripped = arg.strip("/")
     return SanitizedPath(tuple(stripped.split("/")) if stripped else ())
 
+
 def main():
     parser = argparse.ArgumentParser()
     # argparse turns a ValueError from parse_base into a usage error.
@@ -26,7 +28,14 @@ def main():
                         help='where the site is hosted, e.g. "website" (default: the domain root)')
     base: SanitizedPath = parser.parse_args().base
 
-    construct_site(base, MainPage("Suraaj's Webpage", SECTIONS))
+    side = (
+        Text(("Suraaj Kanniwadi",)),
+        Text(("Ph.D. Candidate",)),
+        Text(("Department of Computer Science",)),
+        Text(("Cornell University",)),
+    )
+
+    construct_site(base, MainPage("Suraaj's Webpage", side, SECTIONS))
 
 
 if __name__ == "__main__":

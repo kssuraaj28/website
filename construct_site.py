@@ -15,11 +15,11 @@ def dict_to_css_style(props: dict[str, str]) -> str:
 
 # Same color whether visited or not, and no underline.
 LINK_STYLE = dict_to_css_style({
-    #There is some default 'a:visited' rule or something
-    # "color": "cornflowerblue", 
-    # "color": "dodgerblue", 
-    # "color": "royalblue", 
-    "color": "navy", 
+    # There is some default 'a:visited' rule or something
+    # "color": "cornflowerblue",
+    # "color": "dodgerblue",
+    # "color": "royalblue",
+    "color": "navy",
     "text-decoration": "none",
 })
 
@@ -43,6 +43,7 @@ def render_component(component: SectionComponent):
 
 
 def html_sec_id(index: int) -> str: return f"sec-{index}"
+
 
 def render_section(index: int, sec: Section):
     return h.section(id=html_sec_id(index))[
@@ -100,10 +101,8 @@ def render_homepage(page: MainPage):
     sidebar = h.aside(style=sidebar_style)[
         h.div(style=dict_to_css_style(
             {"height": "30vh", "background-color": "lightblue"}))["A fake image"],
-        h.p["Suraaj Kanniwadi"],
-        h.p["Ph.D. Candidate"],
-        h.p["Department of Computer Science"],
-        h.p["Cornell University"],
+        # I think that you don't need the * either
+        *(render_component(t) for t in page.sidetext),
 
         h.hr(style=dict_to_css_style({  # hr -- horizontal rule
             "border": "none",
@@ -114,19 +113,23 @@ def render_homepage(page: MainPage):
         [h.p[h.a(href=f"#{html_sec_id(i)}", style=LINK_STYLE)[sec.title]]
          for i, sec in numbered],
     ]
-    main = h.main(style=main_style)[(render_section(i, sec) for i, sec in numbered)]
+    main = h.main(style=main_style)[
+        (render_section(i, sec) for i, sec in numbered)]
 
     body = h.body(style=body_style)[sidebar, main]
 
     return h.html(lang="en")[head, body]
 
+
 DISTOUT = ROOT / "_dist"
-ASSETS = ROOT / 'assets' # TODO: This should be somewhere else
+ASSETS = ROOT / 'assets'  # TODO: This should be somewhere else
+
 
 def construct_site(base: SanitizedPath, page: MainPage):
     clean_dist()
-    html =  render_homepage(page)
+    html = render_homepage(page)
     install_dist(base, str(html))
+
 
 def clean_dist():
     # Start from an empty output directory, so that no stale files get deployed.

@@ -129,9 +129,6 @@ DevTools still lists file:// loads in the Network tab, but there's no real traff
 
 # TODO
 assets
-dist -> _dist
 Mobile layout. Media queries.
-Homepage has my name hardcoded
-write_text does not set an encoding
 Add a readme
 Favicon
