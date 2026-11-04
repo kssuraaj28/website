@@ -27,7 +27,7 @@ def main():
 
     from data import about, teaching, talks, research, pubs, software, fun, blog
     sections = tuple(m.this_section for m in [
-                     about, research, teaching,  software])
+                     about, research, pubs, teaching,  software])
     side = (
         WebText(("Suraaj Kanniwadi",)),
         WebText(("Ph.D. Candidate",)),

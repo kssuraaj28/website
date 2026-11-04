@@ -11,10 +11,12 @@ class Publication:
 
 
 def to_text(pub: Publication) -> WebText:
-    return WebText((Bold(pub.name),))
+    authlist = ', '.join(pub.authors)
+    return WebText(( '[', pub.venue_date , '] ', Bold(pub.name), ' - ', authlist))
 
 
 # TODO s
+# Have a _me_
 # Author affliation
 # Talk # Paper # Slides
 optane_sec = Publication("Side-Channel Attacks on Optane Persistent Memory",
@@ -48,5 +50,6 @@ pubs = [optane_sec, cr2, typeconf, nmif]
 pubs.reverse()
 
 # TODO: A-exam
-this_section = Section("Writings and Publications",
+# TODO: Writings and Publications
+this_section = Section("Papers",
                        (BulletList(tuple(to_text(p) for p in pubs)), ))
