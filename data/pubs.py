@@ -38,8 +38,8 @@ cr2 = Publication("CR²: Chain Replication Revisited",
 typeconf = Publication("Type Confusion Security",
                        "In submission",
                        ("Silei Ren",
-                        "Suraaj Kanniwadi",
                         "Hanxi Chen",
+                        "Suraaj Kanniwadi",
                         "Andrew Myers"))
 
 nmif = Publication("Demystifying Information Flow Downgrading using the Real–Ideal Paradigm",
