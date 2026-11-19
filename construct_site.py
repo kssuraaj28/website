@@ -11,7 +11,6 @@ from data_model import Bold, Link, BulletList, MainPage, Section, SectionCompone
 
 BASE = SanitizedPath(())  # Set once by construct_site, before anything renders
 
-
 def construct_site(base: SanitizedPath, page: MainPage):
     global BASE
     BASE = base
@@ -138,7 +137,7 @@ def render_homepage(page: MainPage):
     main_style = dict_to_css_style({
         # I think that grid might be better. Maybe refactor later
         "margin-left": SIDEBAR_WIDTH,  # leave room for the fixed sidebar
-        "max-width" : "1200px",
+        "max-width" : "120ch",
         "padding": "16px",
     })
 
