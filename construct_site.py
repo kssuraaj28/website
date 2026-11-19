@@ -138,17 +138,14 @@ def render_homepage(page: MainPage):
     main_style = dict_to_css_style({
         # I think that grid might be better. Maybe refactor later
         "margin-left": SIDEBAR_WIDTH,  # leave room for the fixed sidebar
-        "margin-right": SIDEBAR_WIDTH,  # TODO: Maybe cap it by something??
+        "max-width" : "1200px",
         "padding": "16px",
     })
 
     headshotstyle = dict_to_css_style({
         "display": "block",  # Images are inline by default, which adds a gap below
-        "object-position": "top",  # From the top
         "width": "80%",
-        "height": "30vh",  # Same height as the old placeholder
-        "object-fit": "cover",  # Fill the box without stretching
-        "margin": "0 auto",
+        "margin": "0 auto", # Centers somehow. TODO
     })
 
     headshot = h.img(src=local_asset_html_url(page.headshot.asset),
