@@ -4,16 +4,16 @@ import htpy as h
 import shutil
 from pathlib import PurePosixPath
 from cur_dir import ROOT
-from data_model import ASSETS, ExternalUrl, Image, LocalAsset
+from data_model import ASSETS, ExternalUrl, LocalAsset
 from paths import SanitizedPath
 
 from data_model import Bold, Link, BulletList, MainPage, Section, SectionComponent, WebText, TextPart
 
-BASE = SanitizedPath(())  # Set once by construct_site, before anything renders
+__base = SanitizedPath(())  # Set once by construct_site, before anything renders
 
 def construct_site(base: SanitizedPath, page: MainPage):
-    global BASE
-    BASE = base
+    global __base
+    __base = base
     clean_dist()
     html = render_homepage(page)
     install_dist(str(html))
@@ -88,16 +88,16 @@ def clean_dist():
 
 
 def install_dist(index_html: str):
-    site_root = DISTOUT.joinpath(*BASE.content)
+    site_root = DISTOUT.joinpath(*__base.content)
     site_root.mkdir(parents=True, exist_ok=True)
     path = site_root / "index.html"
-    path.write_text(index_html, encoding='utf-8')
-    shutil.copytree(ASSETS, site_root / HTML_ASSETS)
+    _ = path.write_text(index_html, encoding='utf-8')
+    _ = shutil.copytree(ASSETS, site_root / HTML_ASSETS)
 
 
 def local_asset_html_url(asset: LocalAsset) -> str:
     # PurePosixPath only uses /
-    url = (PurePosixPath("/", *BASE.content) / HTML_ASSETS
+    url = (PurePosixPath("/", *__base.content) / HTML_ASSETS
            / PurePosixPath(*asset.path.content))
     return str(url)
 

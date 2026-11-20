@@ -21,12 +21,14 @@ def parse_base(arg: str) -> SanitizedPath:
 def main():
     parser = argparse.ArgumentParser()
     # argparse turns a ValueError from parse_base into a usage error.
-    parser.add_argument("--base", type=parse_base, default=SanitizedPath(()),
+    _ = parser.add_argument("--base", type=parse_base, default=SanitizedPath(()),
                         help='where the site is hosted, e.g. "website" (default: the domain root)')
-    base: SanitizedPath = parser.parse_args().base
 
-    from data import about, teaching, talks, research, pubs, software, fun, blog
-    sections = tuple(m.this_section for m in [
+    base: SanitizedPath = parser.parse_args().base  # pyright: ignore[reportAny]
+
+    from data import about, teaching, talks, research, pubs, software, fun, blog  # pyright: ignore[reportUnusedImport]
+
+    sections = tuple(m.this_section for m in [  # pyright: ignore[reportAny]
                      about, research, pubs, teaching,  software])
     side = (
         WebText(("Suraaj Kanniwadi",)),

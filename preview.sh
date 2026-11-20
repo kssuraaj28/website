@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-script_dir="$( cd "$( dirname "$(realpath "${BASH_SOURCE[0]}")" )" >/dev/null 2>&1 && pwd )"
-cd "$script_dir"
-
-uv run pyright
-uv run main.py --base mybase
-uv run python -m http.server -d _dist
