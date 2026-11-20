@@ -31,7 +31,10 @@ talks =  [
   TalkContent("Paxos made Simple", "Cornell CS 6410", date(2022, 9, 27), None),
   TalkContent("Hyperproperties", "Cornell CS 6156", date(2023, 2, 16), None),
 
-  TalkContent("Side-Channel Attacks on Optane Persistent Memory", "USENIX Security '23", date(2023, 8, 11), ExternalUrl('https://www.usenix.org/system/files/sec23_slides_liu-sihang.pdf')),
+  TalkContent("Side-Channel Attacks on Optane Persistent Memory", 
+              "USENIX Security '23", 
+              date(2023, 8, 11),
+              ExternalUrl('https://www.usenix.org/system/files/sec23_slides_liu-sihang.pdf')),
 
   TalkContent("Secure Synthesis of Distributed Cryptographic Applications", "Cornell PLDG", date(2024, 2, 28), None),
 
