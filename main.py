@@ -29,7 +29,7 @@ def main():
     from data import about, teaching, talks, research, pubs, software, fun, blog  # pyright: ignore[reportUnusedImport]
 
     sections = tuple(m.this_section for m in [  # pyright: ignore[reportAny]
-                     about, research, pubs, teaching,  software])
+                     about, research, pubs, teaching, talks, software])
     side = (
         WebText(("Suraaj Kanniwadi",)),
         WebText(("Ph.D. Candidate",)),
