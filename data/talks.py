@@ -2,9 +2,6 @@ from dataclasses import dataclass
 from datetime import date
 from data_model import Bold, BulletList, ExternalUrl, Link, LinkTarget, Section, TextPart, WebText
 
-# Title, Location, Date, Slides
-# XXX @ Usenix secuity 2023 (??/??/??) [slides]
-
 @dataclass(frozen=True)
 class TalkContent:
     title: str
