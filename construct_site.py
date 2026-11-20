@@ -143,7 +143,8 @@ def render_homepage(page: MainPage):
 
     headshotstyle = dict_to_css_style({
         "display": "block",  # Images are inline by default, which adds a gap below
-        "width": "80%",
+        "max-width": "80%", 
+        "max-height": "30%", 
         "margin": "0 auto", # Centers somehow. TODO
     })
 
