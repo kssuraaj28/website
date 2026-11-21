@@ -46,9 +46,10 @@ def render_part(part: TextPart):
         case Link(text, link):
             match link:
                 case ExternalUrl(url):
+                    return h.a(href=url, style=LINK_STYLE)[text] #TODO abstract href..
+                case LocalAsset(_) as asset:
+                    url = local_asset_html_url(asset)
                     return h.a(href=url, style=LINK_STYLE)[text]
-                case LocalAsset(_):
-                    raise NotImplementedError
 
 
 def render_component(component: SectionComponent):
