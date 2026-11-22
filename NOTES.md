@@ -132,3 +132,8 @@ assets
 Mobile layout. Media queries.
 Add a readme
 Favicon
+Combine a resume with this
+ - local links might be a problem.
+ - so make every link an absolute link.
+ - the pdf can then also be able to refer to the website
+ 
