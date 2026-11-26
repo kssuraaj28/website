@@ -7,8 +7,8 @@ from data_model import Bold, BulletList, ExternalUrl, Link, Section, WebText
 class Publication:
     name: str
     venue_date: str
-    authors: tuple[str, ...]  # TODO: Link?
-    links: tuple[Link, ...]
+    authors: tuple[str, ...] 
+    links: tuple[Link, ...] #TODO: Instead of Link, we could have str -> LinkTarget and construct the link ourselves 
 
 
 def to_text(pub: Publication) -> WebText:
