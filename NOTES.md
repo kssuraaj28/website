@@ -128,10 +128,13 @@ The browser fills in what a server would normally provide:
 DevTools still lists file:// loads in the Network tab, but there's no real traffic behind them. Some browsers show a made-up status like 200 or "Finished."
 
 # TODO
-assets
 Mobile layout. Media queries.
 Add a readme
 Favicon
+ - you can get the favicon from local assets
+A blog?
+ - Need a way to have multiple pages
+ - Need to make sure that stupid things like an /assets/ page does not appear
 Combine a resume with this
  - local links might be a problem.
  - so make every link an absolute link.
