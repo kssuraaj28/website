@@ -8,7 +8,7 @@ basedpyright #Better than pyright
 uv run main.py --base '~suraaj' #TODO: Don't hardcode this
 
 if [[ -n "${sync_cornell:-}" ]]; then #Because I did set -u
-  rsync -av '_dist/~suraaj/' coecis:/people/sk2727/
+  rsync -av '_dist/~suraaj/' sk2727@linux.coecis.cornell.edu:/people/sk2727/
 else
   uv run python -m http.server -d _dist
 fi
